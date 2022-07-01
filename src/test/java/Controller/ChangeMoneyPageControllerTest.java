@@ -1,7 +1,7 @@
 package Controller;
 
-import com.example.finalproject3.Contolllers.AddStationPageController;
-import com.example.finalproject3.Contolllers.CreateRoutePageController;
+import com.example.finalproject3.Contolllers.ChangeMoneyController;
+import com.example.finalproject3.Contolllers.ChangeMoneyPageController;
 import com.example.finalproject3.Entity.User;
 import org.junit.jupiter.api.Assertions;
 import org.junit.jupiter.api.Test;
@@ -13,36 +13,30 @@ import javax.servlet.http.HttpSession;
 import static org.mockito.Mockito.*;
 import static org.mockito.Mockito.times;
 
-public class AddStationPageControllerTest {
+public class ChangeMoneyPageControllerTest {
     HttpServletRequest request = mock(HttpServletRequest.class);
     HttpServletResponse response = mock(HttpServletResponse.class);
     HttpSession session = mock(HttpSession.class);
     @Test
     void executeTest(){
+        ChangeMoneyPageController controller = new ChangeMoneyPageController();
+        when(request.getSession()).thenReturn(session);
+
+
         //USER is NULL
-        CreateRoutePageController controller = new CreateRoutePageController();
         when(request.getSession()).thenReturn(session);
         when(session.getAttribute("user")).thenReturn(null);//USER is NULL
         String result = controller.execute(request,response);
         verify(session,times(1)).setAttribute("error","NoPermission");
         Assertions.assertEquals("/",result);
+        when(request.getParameter("money")).thenReturn("150");
 
 
-        //USER is NOT NULL AND NOT ADMIN
-        User user = new User.UserBuilder().userType(0).build();
+        //USER is not NULL
+        User user = new User();
         when(session.getAttribute("user")).thenReturn(user);
         result = controller.execute(request,response);
-        verify(session,times(2)).setAttribute("error","NoPermission");
-        Assertions.assertEquals("/",result);
-
-
-        //USER is ADMIN
-        user = new User.UserBuilder().userType(1).build();
-        when(session.getAttribute("user")).thenReturn(user);
-        result = controller.execute(request,response);
-        Assertions.assertEquals("CreateRoute.jsp",result);
+        Assertions.assertEquals("ChangeMoney.jsp",result);
 
     }
-
-
 }

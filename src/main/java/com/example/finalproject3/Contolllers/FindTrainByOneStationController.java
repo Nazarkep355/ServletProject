@@ -14,7 +14,15 @@ import java.util.ResourceBundle;
 
 public class FindTrainByOneStationController implements ICommand {
     static private Logger logger =Logger.getLogger(FindTrainByOneStationController.class);
-    TrainService trainService = new TrainService();
+    TrainService trainService ;
+    public FindTrainByOneStationController(){
+        trainService = new TrainService();
+    }
+
+    public FindTrainByOneStationController(TrainService trainService) {
+        this.trainService = trainService;
+    }
+
     @Override
     public String execute(HttpServletRequest request, HttpServletResponse response) {
         try {ResourceBundle bundle =Utility.getBundle(request);

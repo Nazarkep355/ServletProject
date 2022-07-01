@@ -14,7 +14,15 @@ import java.util.List;
 
 public class FindTrainsByTwoStationsController implements ICommand {
     static private Logger logger =Logger.getLogger(FindTrainsByTwoStationsController.class);
-    TrainService trainService = new TrainService();
+    TrainService trainService ;
+    public FindTrainsByTwoStationsController(){
+        trainService = new TrainService();
+    }
+
+    public FindTrainsByTwoStationsController(TrainService trainService) {
+        this.trainService = trainService;
+    }
+
     @Override
     public String execute(HttpServletRequest request, HttpServletResponse response) {
        try {int page = Integer.parseInt(request.getParameter("page"));

@@ -1,6 +1,7 @@
 package com.example.finalproject3.Services;
 
 import com.example.finalproject3.DAO.DAOException;
+import com.example.finalproject3.DAO.RouteDAO;
 import com.example.finalproject3.DAO.StationDAO;
 import com.example.finalproject3.Entity.Route;
 import com.example.finalproject3.Entity.Station;
@@ -12,7 +13,16 @@ import java.util.ArrayList;
 import java.util.List;
 
 public class RouteService {
-    public static void deleteInnerStation(Route route,Station station, int newDelay,int newCost)  {
+    RouteDAO routeDAO;
+    public RouteService(){
+        routeDAO = new RouteDAO();
+    }
+
+    public RouteService(RouteDAO routeDAO) {
+        this.routeDAO = routeDAO;
+    }
+
+    public static void deleteInnerStation(Route route, Station station, int newDelay, int newCost)  {
         for(int i =0;i<route.getStations().size();i++){
             if(route.getStations().get(i).equals(station)){
                 if(i>0){route.getDelays().remove(i - 1);
@@ -42,6 +52,10 @@ public class RouteService {
         }
         route.setCost(newCost);
 
+    }
+
+    public boolean addRouteToDataBase(Route route) throws DAOException {
+        return routeDAO.insertRouteInDataBase(route);
     }
 
 }

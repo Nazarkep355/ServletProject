@@ -50,6 +50,11 @@
             <m:locale-tag key="BuyTicket"/>
         </a>
     </li>
+<%-- <form action="url">--%>
+<%--        <input type="hidden" name ="id" value="user.id">--%>
+<%--        <input type="number" name = "sum" >--%>
+<%--        <button type="submit" />--%>
+<%--    </form>--%>
     <li> <a href="/?command=changeMoneyPage" class="nav-link active" aria-current="page" style="width: 250px;margin-top: 15px">
         <svg class="bi me-2" width="16" height="16"><use xlink:href="#home"></use></svg>
         <m:locale-tag key="ChangeMoney"/>
