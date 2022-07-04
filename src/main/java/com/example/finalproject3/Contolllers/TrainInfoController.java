@@ -17,7 +17,6 @@ public class TrainInfoController implements ICommand {
     @Override
     public String execute(HttpServletRequest request, HttpServletResponse response) {
         if(request.getSession().getAttribute("error")!=null){
-            System.out.println(request.getSession().getAttribute("error"));
             request.setAttribute("error",(String)request.getSession().getAttribute("error"));
             request.getSession().setAttribute("error",null);
         }

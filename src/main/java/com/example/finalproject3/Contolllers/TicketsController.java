@@ -26,8 +26,11 @@ public class TicketsController implements ICommand {
 
     @Override
     public String execute(HttpServletRequest request, HttpServletResponse response) {
-        try {
-            User user = (User) request.getSession().getAttribute("user");
+        try {User user = (User) request.getSession().getAttribute("user");
+            if(user==null){
+                request.getSession().setAttribute("error","BeforeBuyingYou");
+                request.setAttribute("redirect",true);
+                return "/";}
             int page = Integer.parseInt(request.getParameter("page"));
             Utility.updateUser(request);
             List<Ticket> tickets = ticketService.getPaginatedTicketsOfUser(user, page);
