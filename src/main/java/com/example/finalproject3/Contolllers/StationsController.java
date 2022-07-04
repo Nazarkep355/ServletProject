@@ -16,14 +16,20 @@ import java.util.List;
 
 public class StationsController implements ICommand {
     static private Logger logger= Logger.getLogger(StationsController.class);
-    StationService stationService = new StationService();
+    StationService stationService;
+    public StationsController(){
+        stationService = new StationService();
+    }
+
+    public StationsController(StationService stationService) {
+        this.stationService = stationService;
+    }
+
     @Override
     public String execute(HttpServletRequest request, HttpServletResponse response) {
         try {int page = Integer.parseInt(request.getParameter("page"));
             User user = (User)request.getSession().getAttribute("user");
-            boolean isLogged=false;
-            if(user!=null)
-                isLogged=true;
+            boolean isLogged= user != null;
             List<Station> stations = stationService.getPaginatedStationList(page);
             request.setAttribute("currentPage",page);
             request.setAttribute("stations",stations);

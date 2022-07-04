@@ -12,7 +12,15 @@ import javax.servlet.http.HttpServletResponse;
 
 public class LoginController implements ICommand {
     static private Logger logger =Logger.getLogger(LoginController.class);
-    private UserService userService = new UserService();
+    private UserService userService;
+    public LoginController(){
+        userService = new UserService();
+    }
+
+    public LoginController(UserService userService) {
+        this.userService = userService;
+    }
+
     @Override
     public String execute(HttpServletRequest request, HttpServletResponse response) {
         String email =request.getParameter("email");

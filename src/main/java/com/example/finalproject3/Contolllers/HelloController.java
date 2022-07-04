@@ -16,8 +16,8 @@ public class HelloController implements ICommand {
         try{String error= (String) request.getSession().getAttribute("error");
             if(error!=null){
                 request.setAttribute("error",error);
-                request.getSession().setAttribute("error",null);
-            }Utility.updateUser(request);
+                request.getSession().setAttribute("error",null);}
+            Utility.updateUser(request);
         }catch (Throwable e){
             logger.info(e);
             throw new RuntimeException(e);

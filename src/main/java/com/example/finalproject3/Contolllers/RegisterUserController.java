@@ -12,7 +12,15 @@ import org.apache.log4j.Logger;
 
 public class RegisterUserController implements ICommand {
     static private Logger logger = Logger.getLogger(RegisterUserController.class);
-    UserService userService = new UserService();
+    UserService userService;
+    public RegisterUserController(){
+        userService = new UserService();
+    }
+
+    public RegisterUserController(UserService userService) {
+        this.userService = userService;
+    }
+
     @Override
     public String execute(HttpServletRequest request, HttpServletResponse response) {
         String email=request.getParameter("email");

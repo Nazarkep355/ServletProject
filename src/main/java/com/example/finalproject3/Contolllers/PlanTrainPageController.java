@@ -4,6 +4,7 @@ import com.example.finalproject3.DAO.RouteDAO;
 import com.example.finalproject3.Entity.Route;
 import com.example.finalproject3.Entity.User;
 import com.example.finalproject3.FrontController.ICommand;
+import com.example.finalproject3.Services.RouteService;
 import com.example.finalproject3.Services.UserService;
 import com.example.finalproject3.Utility.Utility;
 import org.apache.log4j.Logger;
@@ -14,7 +15,15 @@ import java.util.List;
 
 public class PlanTrainPageController implements ICommand {
     static private Logger logger = Logger.getLogger(PlanTrainPageController.class);
-    RouteDAO routeDAO = new RouteDAO();
+    RouteService routeService;
+    public PlanTrainPageController(){
+       routeService = new RouteService();
+    }
+
+    public PlanTrainPageController(RouteService routeService) {
+        this.routeService = routeService;
+    }
+
     @Override
     public String execute(HttpServletRequest request, HttpServletResponse response) {
         try {
@@ -25,7 +34,7 @@ public class PlanTrainPageController implements ICommand {
                 return "/";
             }
             Utility.updateUser(request);
-            List<Route> routes= routeDAO.getAllRoutes();
+            List<Route> routes= routeService.getAllRoutes();
             request.setAttribute("routes",routes);
         } catch (Exception e) {
             logger.info(e);

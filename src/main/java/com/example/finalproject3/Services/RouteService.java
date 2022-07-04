@@ -57,5 +57,8 @@ public class RouteService {
     public boolean addRouteToDataBase(Route route) throws DAOException {
         return routeDAO.insertRouteInDataBase(route);
     }
+    public List<Route> getAllRoutes() throws DAOException {
+        return routeDAO.getAllRoutes();
+    }
 
 }

@@ -15,7 +15,14 @@ import javax.servlet.http.HttpServletResponse;
 
 public class PlanTrainController implements ICommand {
     static private Logger logger= Logger.getLogger(PlanTrainController.class);
-    TrainService trainService = new TrainService();
+    TrainService trainService ;
+    public PlanTrainController(){
+        trainService = new TrainService();
+    }
+    public PlanTrainController(TrainService trainService) {
+        this.trainService = trainService;
+    }
+
     @Override
     public String execute(HttpServletRequest request, HttpServletResponse response) {
         try{

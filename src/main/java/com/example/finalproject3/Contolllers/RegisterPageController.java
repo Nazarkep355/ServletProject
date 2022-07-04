@@ -14,7 +14,6 @@ public class RegisterPageController implements ICommand {
             request.setAttribute("error",error);
             request.getSession().setAttribute("error",null);
         }
-        Utility.setString(request);
         return "Register.jsp";
     }
 }
